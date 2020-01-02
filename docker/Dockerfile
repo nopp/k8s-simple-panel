@@ -15,7 +15,7 @@ RUN apk update \
 
 WORKDIR eks-simple-panel
 
-COPY run.sh /eks-simple-panel
+COPY docker/run.sh /eks-simple-panel
 
 RUN chmod +x /eks-simple-panel/run.sh
 
