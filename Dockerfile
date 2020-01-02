@@ -4,8 +4,8 @@ LABEL maintainer "Carlos Augusto Malucelli <malucellicarlos@gmail.com>"
 
 ENV CLUSTER_NAME=clusterName
 ENV AWS_DEFAULT_REGION=sa-east-1
-ENV	AWS_ACCESS_KEY_ID=accessKey
-ENV	AWS_SECRET_ACCESS_KEY=secretKey
+ENV AWS_ACCESS_KEY_ID=accessKey
+ENV AWS_SECRET_ACCESS_KEY=secretKey
 
 RUN apk update \
     && apk add python3 git \
