@@ -22,5 +22,12 @@ def nodes(namespace):
     except:
        print("Error - Can't list pods.")
 
+@app.route("/deploy/<namespace>",methods=['GET'])
+def deploy(namespace):
+    try:
+        return render_template('deploy.html',results=panel.listDeployByNamespace(namespace),ns=namespace,namespaces=panel.listNamespace())
+    except:
+       print("Error - Can't list pods.")
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0",port=9191, debug=True)

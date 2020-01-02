@@ -11,6 +11,28 @@ class Panel():
 
         return v1        
 
+    # lista deployments
+    # ex list_namespaced_deployment(namespace="pep")
+    def appApi(self):
+
+        config.load_kube_config()
+        v1 = client.AppsV1Api()
+
+        return v1    
+
+    def listDeployByNamespace(self,ns):
+
+        cluster = self.appApi()
+
+        namespaceInfo = {}
+        listNamespace = []
+
+        # List namespaces
+        for deploy in cluster.list_namespaced_deployment(namespace=ns).items:
+            print(deploy)
+
+        return ""
+
     def listNamespace(self):
 
         cluster = self.connectCluster()
