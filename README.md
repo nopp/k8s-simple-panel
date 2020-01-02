@@ -92,3 +92,8 @@ RUNNING ON SEVER
     # git clone https://github.com/nopp/k8spanel.git
     # cd k8spanel
     # python main.py
+    
+Screenshot
+==========
+![Image Alt](https://raw.githubusercontent.com/nopp/k8spanel/master/panel-1.png)
+![Image Alt](https://raw.githubusercontent.com/nopp/k8spanel/master/panel-2.png)
