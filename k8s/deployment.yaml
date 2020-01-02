@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eks-panel
+  labels:
+    app: eks-panel
+spec:
+  selector:
+    matchLabels:
+      app: eks-panel
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: eks-panel
+    spec:
+      containers:
+      - image: nopp/eks-simple-panel:1.0
+        name: eks-panel
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9191
+          name: eks-panel
+        env:
+        - name: CLUSTER_NAME
+          value: "clusterName"
+        - name: AWS_DEFAULT_REGION
+          value: "sa-east-1"
+        - name: AWS_ACCESS_KEY_ID
+          value: "accessKey"
+        - name: AWS_SECRET_ACCESS_KEY
+          value: "secretKey"
