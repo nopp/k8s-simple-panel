@@ -96,7 +96,7 @@ RUNNING ON SEVER
 RUNNING ON DOCKER
 =================
 
-    # docker container run -p 9191:9191 -e AWS_ACCESS_KEY_ID=yourAccessKey -e AWS_SECRET_ACCESS_KEY='yourSecretKey' -e AWS_DEFAULT_REGION='regionOfCluster' -e CLUSTER_NAME='eksClusterName' -d nopp/eks-simple-panel:1.0
+    # docker container run -d -e CLUSTER_NAME="clusterName" -e AWS_ACCESS_KEY_ID="yourAccessKey" -e AWS_SECRET_ACCESS_KEY="yourSecretKey" -p 9191:9191 nopp/eks-simple-panel:1.0
 
 Screenshot
 ==========
