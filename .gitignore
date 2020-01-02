@@ -1,0 +1,5 @@
+opa.json
+result.json
+*.pyc
+methods.json
+k8s_prevent.png

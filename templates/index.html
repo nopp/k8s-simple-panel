@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block body %}
+<link href="https://getbootstrap.com/docs/4.3/assets/css/docs.min.css" rel="stylesheet">
+<div class="row">
+    <div class="container">
+        <div class="border-left border-bottom p-2 mb-3">Nodes</div>
+    </div>  
+    {% for node in results|sort(attribute="name") %}
+    <div class="col-sm-4">
+        <div class="card shadow-sm" style="width: 17rem; margin-bottom: 15px;">
+            <div class="card-body">
+            <h6 class="card-title">
+                <i class="fas fa-server text-sm"></i> {{ node['name'].split(".")[0] }}
+            </h6>
+            <p class="card-text">
+                <b>Cluster</b><br>
+                {{ node['labels']['alpha.eksctl.io/cluster-name'] }}
+            </p>
+            <p class="card-text">
+                <b>Nodegroup</b><br>
+                {{ node['labels']['alpha.eksctl.io/nodegroup-name'] }}
+            </p>            
+            </div>
+        </div>
+    </div>    
+    {% endfor %} 
+</div>
+{% endblock %}
