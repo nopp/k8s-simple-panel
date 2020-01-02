@@ -22,7 +22,7 @@
                 {{ node['labels']['alpha.eksctl.io/cluster-name'] }}
             </p>
             <p class="card-text">
-                <i class='fab fa-docker' data-toggle="tooltip" data-placement="top" title="{{ node['node_info']['container_runtime_version'] }}"></i>
+                <i class='fab fa-docker' data-toggle="tooltip" data-placement="top" title="{{ node['node_info']['container_runtime_version'].split('://')[1] }}"></i>
                 {% if node['node_info']['operating_system'] == "linux" %} 
                     <i class="fab fa-linux" data-toggle="tooltip" data-placement="top" title="{{ node['node_info']['os_image'] }}"></i>
                 {% else %}
