@@ -63,6 +63,7 @@ class Panel():
             podInfo['namespace'] = pod.metadata.namespace
             podInfo['status'] = pod.status.phase
             podInfo['start_time'] = pod.status.start_time
+            podInfo['labels'] = pod.metadata.labels
             # List containers inside pod, pod can be one or more containers
             totalContainer = 0
             for container in pod.spec.containers:

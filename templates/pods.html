@@ -1,6 +1,5 @@
 {% extends "layout.html" %}
 {% block body %}
-<!-- <link href="https://getbootstrap.com/docs/4.3/assets/css/docs.min.css" rel="stylesheet"> -->
 <div class="row">
     <div class="container">
         <div class="border-left border-bottom p-2 mb-3"><b>Pods</b> of {{ ns }}</div>
@@ -10,11 +9,14 @@
             <div class="card">
                 <div class="card-header">
                     {{ pod['name'] }}
-                    <h9 class="card-subtitle text-muted"> deployed {{ pod['start_time'].strftime('%d/%m/%Y %H:%M') }}</h9>
+                    <h9 class="card-subtitle text-muted"> deployed {{ pod['start_time'].strftime('%d/%m/%Y %H:%M') }}</h9><br>
+                    {% for key,label in pod['labels'].items() %}
+                    <span class="badge badge-dark">{{ key }}:{{ label }}</span>
+                    {% endfor %}
                 </div>
                 <div class="card-body">
                     {% for container in pod['containers'] %}
-                        <i class="fab fa-docker"></i> {{ container['name'] }} ({{ container['image'].split("/")[-1] }})<br>
+                        <i class='fab fa-docker'></i> {{ container['name'] }} ({{ container['image'].split("/")[-1] }})
                     {% endfor %}
                 </div>
             </div><br>

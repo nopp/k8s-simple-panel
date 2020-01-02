@@ -1,5 +1,10 @@
 {% extends "layout.html" %}
 {% block body %}
+<script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 <link href="https://getbootstrap.com/docs/4.3/assets/css/docs.min.css" rel="stylesheet">
 <div class="row">
     <div class="container">
@@ -17,9 +22,14 @@
                 {{ node['labels']['alpha.eksctl.io/cluster-name'] }}
             </p>
             <p class="card-text">
-                <b>Nodegroup</b><br>
-                {{ node['labels']['alpha.eksctl.io/nodegroup-name'] }}
-            </p>            
+                <i class='fab fa-docker' data-toggle="tooltip" data-placement="top" title="{{ node['node_info']['container_runtime_version'] }}"></i>
+                {% if node['node_info']['operating_system'] == "linux" %} 
+                    <i class="fab fa-linux" data-toggle="tooltip" data-placement="top" title="{{ node['node_info']['os_image'] }}"></i>
+                {% else %}
+                    <i class="fab fa-windows" data-toggle="tooltip" data-placement="top" title="{{ node['node_info']['os_image'] }}"></i>
+                {% endif %}
+            </p>
+            <span class="badge badge-dark">nodegroup:{{ node['labels']['alpha.eksctl.io/nodegroup-name'] }}</span>
             </div>
         </div>
     </div>    
