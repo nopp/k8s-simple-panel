@@ -95,5 +95,5 @@ RUNNING ON SEVER
     
 Screenshot
 ==========
-![Image Alt](https://raw.githubusercontent.com/nopp/k8spanel/master/panel-1.png)
-![Image Alt](https://raw.githubusercontent.com/nopp/k8spanel/master/panel-2.png)
+![Image Alt](https://raw.githubusercontent.com/nopp/eks-simple-panel/master/screenshots/panel-1.png)
+![Image Alt](https://raw.githubusercontent.com/nopp/eks-simple-panel/master/screenshots/panel-2.png)
