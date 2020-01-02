@@ -92,7 +92,12 @@ RUNNING ON SEVER
     # git clone https://github.com/nopp/k8spanel.git
     # cd k8spanel
     # python main.py
-    
+
+RUNNING ON DOCKER
+=================
+
+    # docker container run -p 9191:9191 -e AWS_ACCESS_KEY_ID=yourAccessKey -e AWS_SECRET_ACCESS_KEY='yourSecretKey' -e AWS_DEFAULT_REGION='regionOfCluster' -e CLUSTER_NAME='eksClusterName' -d nopp/eks-simple-panel:1.0
+
 Screenshot
 ==========
 ![Image Alt](https://raw.githubusercontent.com/nopp/eks-simple-panel/master/screenshots/panel-1.png)
