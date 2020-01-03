@@ -2,7 +2,7 @@ from kubernetes import client, config
 
 class Panel():
 
-    hideNamespace = ["default","kube-logging","kube-system","kube-node-lease","kube-public","tiller","prometheus"]
+    hideNamespace = ["kube-logging","kube-system","kube-node-lease","kube-public","tiller","prometheus"]
 
     def connectCluster(self):
 
@@ -83,7 +83,10 @@ class Panel():
             podInfo['ip'] = pod.status.pod_ip
             podInfo['name'] = pod.metadata.name
             podInfo['namespace'] = pod.metadata.namespace
-            podInfo['status'] = pod.status.phase
+            if pod.status.container_statuses[0].state.waiting:
+                podInfo['status'] = pod.status.container_statuses[0].state.waiting.reason
+            else:
+                podInfo['status'] = pod.status.phase           
             podInfo['start_time'] = pod.status.start_time
             podInfo['labels'] = pod.metadata.labels
             # List containers inside pod, pod can be one or more containers
@@ -154,6 +157,7 @@ class Panel():
             nodeInfo['name'] = node.metadata.name
             nodeInfo['labels'] = node.metadata.labels
             nodeInfo['node_info'] = node.status.node_info
+            nodeInfo['ip'] = node.status.addresses[0].address
             listNode.append(nodeInfo)
             nodeInfo = {}
 
