@@ -80,13 +80,13 @@ class Panel():
 
         # List pods inside specific namespace
         for pod in cluster.list_namespaced_pod(namespace=ns).items:
-            podInfo['ip'] = pod.status.pod_ip
-            podInfo['name'] = pod.metadata.name
-            podInfo['namespace'] = pod.metadata.namespace
             if pod.status.container_statuses[0].state.waiting:
                 podInfo['status'] = pod.status.container_statuses[0].state.waiting.reason
             else:
-                podInfo['status'] = pod.status.phase           
+                podInfo['status'] = pod.status.phase    
+            podInfo['ip'] = pod.status.pod_ip
+            podInfo['name'] = pod.metadata.name
+            podInfo['namespace'] = pod.metadata.namespace
             podInfo['start_time'] = pod.status.start_time
             podInfo['labels'] = pod.metadata.labels
             # List containers inside pod, pod can be one or more containers
