@@ -1,4 +1,4 @@
-# EKS Simple Panel
+# k8s Simple Panel
 
 Constantly updated
 
@@ -8,10 +8,13 @@ Features
 * List pods
 * List containers
 
-CONFIGURING K8S USER
-====================
+TO RUN ON AWS EKS
+==================
 
-1) Create IAM user(ex: eks-readonly) with this policy:
+1)CONFIGURING K8S USER
+======================
+
+1.1) Create IAM user(ex: eks-readonly) with this policy:
 ```
 {
     "Version": "2012-10-17",
@@ -27,18 +30,18 @@ CONFIGURING K8S USER
 } 
 ```
 
-2) Edit aws-auth
+1.2) Edit aws-auth
 ```
 kubectl edit cm -n kube-system aws-auth
 ```
 
-3) Add information below inside mapUsers, ex:
+1.3) Add information below inside mapUsers, ex:
 ```
 mapUsers: |
     - userarn: arn:aws:iam::xxx:user/eks-readonly
         username: eks-readonly
 ```
-4) Create cluster role
+1.4) Create cluster role
 ```
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -70,7 +73,7 @@ rules:
   - list
   - watch
 ```
-5) Create cluster role binding    
+1.5) Create cluster role binding    
 ```
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -86,6 +89,12 @@ subjects:
   name: eks-readonly
 ```
 
+2)RUNNING ON DOCKER
+===================
+
+    # docker container run -d -e CLUSTER_NAME="clusterName" -e AWS_ACCESS_KEY_ID="yourAccessKey" -e AWS_SECRET_ACCESS_KEY="yourSecretKey" -p 9191:9191 nopp/eks-simple-panel:1.0
+
+
 RUNNING ON SEVER
 ================
 
@@ -93,10 +102,6 @@ RUNNING ON SEVER
     # cd k8spanel
     # python main.py
 
-RUNNING ON DOCKER
-=================
-
-    # docker container run -d -e CLUSTER_NAME="clusterName" -e AWS_ACCESS_KEY_ID="yourAccessKey" -e AWS_SECRET_ACCESS_KEY="yourSecretKey" -p 9191:9191 nopp/eks-simple-panel:1.0
 
 Screenshot
 ==========
