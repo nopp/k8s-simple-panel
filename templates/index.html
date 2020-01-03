@@ -17,10 +17,14 @@
             <h6 class="card-title">
                 <i class="fas fa-server text-sm"></i> {{ node['name'].split(".")[0] }}
             </h6>
+            {% if node['labels']['alpha.eksctl.io/cluster-name'] is defined %}
             <p class="card-text">
-                <b>Cluster</b><br>
-                {{ node['labels']['alpha.eksctl.io/cluster-name'] }}
+                <b>Cluster</b> {{ node['labels']['alpha.eksctl.io/cluster-name'] }}
             </p>
+            {% endif %}
+            <p class="card-text">
+                <b>IP</b> {{ node['ip'] }}
+            </p>            
             <p class="card-text">
                 <i class='fab fa-docker' data-toggle="tooltip" data-placement="top" title="{{ node['node_info']['container_runtime_version'].split('://')[1] }}"></i>
                 {% if node['node_info']['operating_system'] == "linux" %} 
@@ -29,7 +33,9 @@
                     <i class="fab fa-windows" data-toggle="tooltip" data-placement="top" title="{{ node['node_info']['os_image'] }}"></i>
                 {% endif %}
             </p>
+            {% if node['labels']['alpha.eksctl.io/nodegroup-name'] is defined %}
             <span class="badge badge-dark">nodegroup:{{ node['labels']['alpha.eksctl.io/nodegroup-name'] }}</span>
+            {% endif %}
             </div>
         </div>
     </div>    
