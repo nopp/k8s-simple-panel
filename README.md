@@ -79,7 +79,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: aatw
+  name: eks-readonly
 subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: User
