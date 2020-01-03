@@ -3,3 +3,4 @@ result.json
 *.pyc
 methods.json
 0.jpg
+k8s/deployment.yaml
