@@ -40,50 +40,50 @@ mapUsers: |
 ```
 4) Create cluster role
 ```
-kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
 metadata:
-name: eks-readonly
+  name: eks-readonly
 rules:
 - apiGroups:
-- ""
-resources:
-- '*'
-verbs:
-- get
-- list
-- watch
+  - ""
+  resources:
+  - '*'
+  verbs:
+  - get
+  - list
+  - watch
 - apiGroups:
-- extensions
-resources:
-- '*'
-verbs:
-- get
-- list
-- watch
+  - extensions
+  resources:
+  - '*'
+  verbs:
+  - get
+  - list
+  - watch
 - apiGroups:
-- apps
-resources:
-- '*'
-verbs:
-- get
-- list
-- watch  
+  - apps
+  resources:
+  - '*'
+  verbs:
+  - get
+  - list
+  - watch
 ```
 5) Create cluster role binding    
 ```
-kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
 metadata:
-name: eks-readonly
-subjects:
-- kind: User
-name: eks-readonly
-apiGroup: rbac.authorization.k8s.io
+  name: eks-readonly
 roleRef:
-kind: ClusterRole
-name: eks-readonly
-apiGroup: rbac.authorization.k8s.io    
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: aatw
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: User
+  name: eks-readonly
 ```
 
 RUNNING ON SEVER
