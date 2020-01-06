@@ -169,7 +169,10 @@ class Panel():
 
         logLines = []
 
-        for line in cluster.read_namespaced_pod_log(pod, ns).splitlines():
-            logLines.append(line)
-
-        return logLines
+        try:
+        
+            for line in cluster.read_namespaced_pod_log(pod, ns).splitlines():
+                logLines.append(line)
+            return logLines                
+        except:
+            return ""
