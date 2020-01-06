@@ -162,3 +162,14 @@ class Panel():
             nodeInfo = {}
 
         return listNode
+
+    def listLogByPod(self,pod,ns):
+
+        cluster = self.connectCluster()
+
+        logLines = []
+
+        for line in cluster.read_namespaced_pod_log(pod, ns).splitlines():
+            logLines.append(line)
+
+        return logLines
