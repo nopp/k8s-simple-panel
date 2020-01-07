@@ -1,6 +1,6 @@
 # k8s Simple Panel
 
-Constantly updated
+<img src="https://travis-ci.com/nopp/k8s-simple-panel.svg?branch=master">
 
 Features
 ========
