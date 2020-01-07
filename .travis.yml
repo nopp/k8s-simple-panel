@@ -21,5 +21,6 @@ before_deploy:
 
 deploy:
   provider: script
+  script: docker images ls
   on:
     branch: master
