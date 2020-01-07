@@ -9,9 +9,9 @@
             <div class="card">
                 <div class="card-header">
                     {% if pod['status'] == "Running" %}
-                    <i class="fas fa-circle" style="color: green;"></i> {{ pod['name'] }} (<a href="/logs/{{ns}}/{{ pod['name'] }}"><i class='far fa-file-alt'></i> log</a>)<br>
+                    <i class="fas fa-circle" style="color: green;"></i> {{ pod['name'] }} (<a href="/logs/{{ns}}/{{ pod['name'] }}"><i class='far fa-file-alt'></i> log</a>) ({{ pod['status'] }}) <br>
                     {% elif pod['status'] == "ContainerCreating"%}
-                    <i class="fas fa-circle" style="color: orange;"></i> {{ pod['name'] }} (<a href="/logs/{{ns}}/{{ pod['name'] }}"><i class='far fa-file-alt'></i> log</a>)<br>
+                    <i class="fas fa-circle" style="color: orange;"></i> {{ pod['name'] }} (<a href="/logs/{{ns}}/{{ pod['name'] }}"><i class='far fa-file-alt'></i> log</a> ({{ pod['status'] }}) <br>
                     {% else %}
                     <i class="fas fa-circle" style="color: red;"></i> {{ pod['name'] }}
                         {% if pod['start_time'] != None %}
