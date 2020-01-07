@@ -157,7 +157,6 @@ class Panel():
 
         # List all nodes
         for node in cluster.list_node().items:
-            print(node)
             nodeInfo['name'] = node.metadata.name
             nodeInfo['labels'] = node.metadata.labels
             nodeInfo['node_info'] = node.status.node_info
