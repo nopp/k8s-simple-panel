@@ -9,13 +9,17 @@
             <div class="card">
                 <div class="card-header">
                     {% if pod['status'] == "Running" %}
-                    <i class="fas fa-circle" style="color: green;"></i> {{ pod['name'] }} (<a href="/logs/{{ns}}/{{ pod['name'] }}"><i class='far fa-file-alt'></i> log</a>)
+                    <i class="fas fa-circle" style="color: green;"></i> {{ pod['name'] }} (<a href="/logs/{{ns}}/{{ pod['name'] }}"><i class='far fa-file-alt'></i> log</a>)<br>
                     {% elif pod['status'] == "ContainerCreating"%}
-                    <i class="fas fa-circle" style="color: orange;"></i> {{ pod['name'] }} (<a href="/logs/{{ns}}/{{ pod['name'] }}"><i class='far fa-file-alt'></i> log</a>)
+                    <i class="fas fa-circle" style="color: orange;"></i> {{ pod['name'] }} (<a href="/logs/{{ns}}/{{ pod['name'] }}"><i class='far fa-file-alt'></i> log</a>)<br>
                     {% else %}
                     <i class="fas fa-circle" style="color: red;"></i> {{ pod['name'] }}
+                        {% if pod['start_time'] != None %}
+                        <h9 class="card-subtitle text-muted"> deployed {{ pod['start_time'].strftime('%d/%m/%Y %H:%M') }}</h9> ({{ pod['status'] }})<br>
+                        {% else %}
+                        ({{ pod['status'] }}) <br>
+                        {% endif %}
                     {% endif %}
-                    <h9 class="card-subtitle text-muted"> deployed {{ pod['start_time'].strftime('%d/%m/%Y %H:%M') }}</h9> ({{ pod['status'] }})<br>
                     {% for key,label in pod['labels'].items() %}
                     <span class="badge badge-dark">{{ key }}:{{ label }}</span>
                     {% endfor %}

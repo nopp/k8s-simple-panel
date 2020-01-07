@@ -80,10 +80,13 @@ class Panel():
 
         # List pods inside specific namespace
         for pod in cluster.list_namespaced_pod(namespace=ns).items:
-            if pod.status.container_statuses[0].state.waiting:
-                podInfo['status'] = pod.status.container_statuses[0].state.waiting.reason
+            if pod.status.container_statuses is not None:
+                if pod.status.container_statuses[0].state.waiting:
+                    podInfo['status'] = pod.status.container_statuses[0].state.waiting.reason
+                else:
+                    podInfo['status'] = pod.status.phase
             else:
-                podInfo['status'] = pod.status.phase    
+                podInfo['status'] = pod.status.phase
             podInfo['ip'] = pod.status.pod_ip
             podInfo['name'] = pod.metadata.name
             podInfo['namespace'] = pod.metadata.namespace
@@ -154,6 +157,7 @@ class Panel():
 
         # List all nodes
         for node in cluster.list_node().items:
+            print(node)
             nodeInfo['name'] = node.metadata.name
             nodeInfo['labels'] = node.metadata.labels
             nodeInfo['node_info'] = node.status.node_info
@@ -170,7 +174,6 @@ class Panel():
         logLines = []
 
         try:
-        
             for line in cluster.read_namespaced_pod_log(pod, ns).splitlines():
                 logLines.append(line)
             return logLines                
