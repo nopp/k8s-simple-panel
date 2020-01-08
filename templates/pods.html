@@ -9,10 +9,10 @@
             <div class="card">
                 <div class="card-header">
                     {% if pod['status'] == "Running" %}
-                    <i class="fas fa-circle" style="color: green;"></i> {{ pod['name'] }} (<a href="/logs/{{ns}}/{{ pod['name'] }}"><i class='far fa-file-alt'></i> log</a>)
+                    <i class="fas fa-circle" style="color: green;"></i> {{ pod['name'] }}
                     <h9 class="card-subtitle text-muted"> deployed {{ pod['start_time'].strftime('%d/%m/%Y %H:%M') }}</h9> ({{ pod['status'] }})<br>
                     {% elif pod['status'] == "ContainerCreating"%}
-                    <i class="fas fa-circle" style="color: orange;"></i> {{ pod['name'] }} (<a href="/logs/{{ns}}/{{ pod['name'] }}"><i class='far fa-file-alt'></i> log</a> ({{ pod['status'] }}) <br>
+                    <i class="fas fa-circle" style="color: orange;"></i> {{ pod['name'] }} ({{ pod['status'] }}) <br>
                     {% else %}
                     <i class="fas fa-circle" style="color: red;"></i> {{ pod['name'] }} ({{ pod['status'] }}) <br>
                     {% endif %}
@@ -22,7 +22,7 @@
                 </div>
                 <div class="card-body">
                     {% for container in pod['containers'] %}
-                        <i class='fab fa-docker'></i> {{ container['name'] }} ({{ container['image'].split("/")[-1] }})<br>
+                        <i class='fab fa-docker'></i> {{ container['name'] }} ({{ container['image'].split("/")[-1] }}) (<a href="/logs/{{ns}}/{{ pod['name'] }}/{{ container['name'] }}"><i class='far fa-file-alt'></i> log</a>)<br>
                     {% endfor %}
                 </div>
             </div><br>
