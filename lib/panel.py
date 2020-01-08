@@ -101,12 +101,12 @@ class Panel():
                 containerInfo['liveness_probe'] = container.liveness_probe
                 containerInfo['readiness_probe'] = container.readiness_probe
                 listContainer.append(containerInfo)
+                containerInfo = {}
             podInfo['total_container'] = totalContainer
             podInfo['containers'] = listContainer
             listPod.append(podInfo)
             podInfo = {}
             listContainer = []
-            containerInfo = {}
 
         return listPod
 
