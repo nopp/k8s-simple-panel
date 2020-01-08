@@ -2,10 +2,9 @@
 {% block body %}
 <div class="row">
     <div class="container">
-        <div class="border-left border-bottom p-2 mb-3"><b>Logs of</b> {{ pod }} ({{ ns }})</div>
+        <div class="border-left border-bottom p-2 mb-3"><b>Logs of</b> {{ pod }}/{{ container }} ({{ ns }})</div>
     </div>    
     <div class="container">
-        <!-- {{results}} -->
     {% for log in results %}
         {{log|e}}<br>
     {% endfor %}
