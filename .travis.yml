@@ -17,11 +17,10 @@ after_script:
   - docker images
 
 before_deploy:
-  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
   - docker tag "$IMAGE_NAME" "${IMAGE_NAME}:latest"
 
 deploy:
   provider: script
-  script: docker push "${IMAGE_NAME}:latest"
+  script: docker images ls
   on:
     branch: master
