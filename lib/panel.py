@@ -166,14 +166,14 @@ class Panel():
 
         return listNode
 
-    def listLogByPod(self,pod,ns):
+    def listLogByPod(self,pod,cont,ns):
 
         cluster = self.connectCluster()
 
         logLines = []
 
         try:
-            for line in cluster.read_namespaced_pod_log(pod, ns).splitlines():
+            for line in cluster.read_namespaced_pod_log(name=pod,container=cont,namespace=ns).splitlines():
                 logLines.append(line)
             return logLines                
         except:
