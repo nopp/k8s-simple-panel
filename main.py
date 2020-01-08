@@ -29,10 +29,10 @@ def deploy(namespace):
     except:
        print("Error - Can't list pods.")
 
-@app.route("/logs/<namespace>/<pod>/",methods=['GET'])
-def logs(namespace,pod):
+@app.route("/logs/<namespace>/<pod>/<container>",methods=['GET'])
+def logs(namespace,pod,container):
     try:
-        return render_template('logs.html',results=panel.listLogByPod(pod,namespace),pod=pod,ns=namespace,namespaces=panel.listNamespace())
+        return render_template('logs.html',results=panel.listLogByPod(pod,container,namespace),pod=pod,container=container,ns=namespace,namespaces=panel.listNamespace())
     except:
        print("Error - Can't list pods.")
 
