@@ -22,7 +22,7 @@
                 </div>
                 <div class="card-body">
                     {% for container in pod['containers'] %}
-                        <i class='fab fa-docker'></i> {{ container['name'] }} ({{ container['image'].split("/")[-1] }}) (<a href="/logs/{{ns}}/{{ pod['name'] }}/{{ container['name'] }}"><i class='far fa-file-alt'></i> log</a>)<br>
+                        <i class='fab fa-docker'></i> {{ container['name'] }} ({{ container['image'].split("/")[-1] }}) <a href="/logs/{{ns}}/{{ pod['name'] }}/{{ container['name'] }}" class="badge badge-pill badge-dark">Log</a><br>
                     {% endfor %}
                 </div>
             </div><br>
