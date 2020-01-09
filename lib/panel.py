@@ -175,6 +175,6 @@ class Panel():
         try:
             for line in cluster.read_namespaced_pod_log(name=pod,container=cont,namespace=ns).splitlines():
                 logLines.append(line)
-            return logLines                
+            return logLines
         except:
             return ""
