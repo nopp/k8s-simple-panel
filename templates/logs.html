@@ -1,7 +1,15 @@
 {% extends "layout.html" %}
 {% block body %}
+<style>
+textarea {
+  resize: none;
+}
+</style>
 <script type="text/javascript">
+    let searchParams = new URLSearchParams(window.location.search)
+    var pathname = window.location.pathname;
 	$(document).ready(function () {
+        $('.ar').html("<br><a href="+pathname+"?ar>enable auto-refresh (5s)</a>");
         var textarea = document.getElementById('result');
         $.get("/onlylog/{{ns}}/{{pod}}/{{container}}", function( data ) {
             var aux = ""
@@ -11,25 +19,28 @@
             $('.result').html(aux);
             textarea.scrollTop = textarea.scrollHeight;           
         });
-		var auto_refresh = setInterval(
-			function () {
-                $.get("/onlylog/{{ns}}/{{pod}}/{{container}}", function( data ) {
-                    var aux = ""
-                    $.each(data, function(key, val) {
-                        aux = aux+val+"\n"
-                    }); 
-                    $('.result').html(aux);           
-                });               
-                textarea.scrollTop = textarea.scrollHeight;
-			}, 5000)
+        if (searchParams.has('ar')) {
+            $('.ar').html("<br><a href="+pathname+">disable auto-refresh</a>");
+            var auto_refresh = setInterval(
+                function () {
+                    $.get("/onlylog/{{ns}}/{{pod}}/{{container}}", function( data ) {
+                        var aux = ""
+                        $.each(data, function(key, val) {
+                            aux = aux+val+"\n"
+                        }); 
+                        $('.result').html(aux);           
+                    });               
+                    textarea.scrollTop = textarea.scrollHeight;
+                }, 5000)
+        }
 	});
 </script>
 <div class="row">
     <div class="container">
-        <div class="border-left border-bottom p-2 mb-3"><b>Logs of</b> {{ pod }}/{{ container }} ({{ ns }})<br>updated every 5s</div>
+        <div class="border-left border-bottom p-2 mb-3"><b>Logs of</b> {{ pod }}/{{ container }} ({{ ns }}) <span class="ar"></span></div>
     </div>    
     <div class="container">
-        <textarea class="result" id="result" name="story"rows="30" cols="90"></textarea>
+        <textarea class="result border-0 rounded" id="result" name="story"rows="30" cols="90"></textarea>
     </div>
 </div>
 {% endblock %}
