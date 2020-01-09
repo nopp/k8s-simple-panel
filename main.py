@@ -29,12 +29,16 @@ def deploy(namespace):
     except:
        print("Error - Can't list pods.")
 
+@app.route("/onlylog/<namespace>/<pod>/<container>",methods=['GET'])
+def onlylog(namespace,pod,container):
+    return Response(json.dumps(panel.listLogByPod(pod,container,namespace)),  mimetype='application/json')
+
 @app.route("/logs/<namespace>/<pod>/<container>",methods=['GET'])
 def logs(namespace,pod,container):
     try:
         return render_template('logs.html',results=panel.listLogByPod(pod,container,namespace),pod=pod,container=container,ns=namespace,namespaces=panel.listNamespace())
     except:
-       print("Error - Can't list pods.")
+       print("Error - Can't list pods.")   
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0",port=9191, debug=True)
