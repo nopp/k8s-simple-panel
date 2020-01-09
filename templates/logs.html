@@ -1,13 +1,35 @@
 {% extends "layout.html" %}
 {% block body %}
+<script type="text/javascript">
+	$(document).ready(function () {
+        var textarea = document.getElementById('result');
+        $.get("/onlylog/{{ns}}/{{pod}}/{{container}}", function( data ) {
+            var aux = ""
+            $.each(data, function(key, val) {
+                aux = aux+val+"\n"
+            }); 
+            $('.result').html(aux);
+            textarea.scrollTop = textarea.scrollHeight;           
+        });
+		var auto_refresh = setInterval(
+			function () {
+                $.get("/onlylog/{{ns}}/{{pod}}/{{container}}", function( data ) {
+                    var aux = ""
+                    $.each(data, function(key, val) {
+                        aux = aux+val+"\n"
+                    }); 
+                    $('.result').html(aux);           
+                });               
+                textarea.scrollTop = textarea.scrollHeight;
+			}, 5000)
+	});
+</script>
 <div class="row">
     <div class="container">
-        <div class="border-left border-bottom p-2 mb-3"><b>Logs of</b> {{ pod }}/{{ container }} ({{ ns }})</div>
+        <div class="border-left border-bottom p-2 mb-3"><b>Logs of</b> {{ pod }}/{{ container }} ({{ ns }})<br>updated every 5s</div>
     </div>    
     <div class="container">
-    {% for log in results %}
-        {{log|e}}<br>
-    {% endfor %}
+        <textarea class="result" id="result" name="story"rows="30" cols="90"></textarea>
     </div>
 </div>
 {% endblock %}
