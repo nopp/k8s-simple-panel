@@ -1,6 +1,6 @@
 # k8s Simple Panel
 
-<img src="https://travis-ci.com/nopp/k8s-simple-panel.svg?branch=master">
+![Code scanning - action](https://github.com/nopp/k8s-simple-panel/workflows/Code%20scanning%20-%20action/badge.svg)
 
 Features
 ========
